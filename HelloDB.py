@@ -22,6 +22,7 @@ class Application(tk.Frame):
         self.dbReadButton = tk.Button(self,text="Read DB",command=self.myDBRead)
         self.dbAddPerson = tk.Button(self,text="Add to DB",command=self.myDBAdd)
         self.quitButton = tk.Button(self,text="Quit",command=self.myQuit)
+        self.nameTextBox = tk.Text(self,height = 1,width = 25,bg = "light yellow")
         
         self.canvas1 = tk.Canvas(self,height=100,width=60,bd=CANVAS_BORDER,relief=tk.RIDGE)
         self.testButton.grid(column = 0,row=0,padx=20,pady=20) #places the button on the app frame
@@ -29,6 +30,7 @@ class Application(tk.Frame):
         self.dbReadButton.grid(column = 2,row=0,padx=20,pady=20)
         self.dbAddPerson.grid(column = 3,row=0,padx=20,pady=20)
         self.quitButton.grid(column = 4,row=0,padx=20,pady=20)
+        self.nameTextBox.grid(column = 0, row = 1,padx=20,pady=20)
         self.canvas1.grid(row=2)
     
     def create_sqlite_database(self):
