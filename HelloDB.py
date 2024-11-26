@@ -22,7 +22,10 @@ class Application(tk.Frame):
         self.dbReadButton = tk.Button(self,text="Read DB",command=self.myDBRead)
         self.dbAddPerson = tk.Button(self,text="Add to DB",command=self.myDBAdd)
         self.quitButton = tk.Button(self,text="Quit",command=self.myQuit)
-        self.nameTextBox = tk.Text(self,height = 1,width = 25,bg = "light yellow")
+        self.firstNameLabel = tk.Label(self,text="First Name : ",   
+                 height=1,              
+                 width=30,anchor="e")
+        self.nameEntry = tk.Entry(self,width = 25)
         
         self.canvas1 = tk.Canvas(self,height=100,width=60,bd=CANVAS_BORDER,relief=tk.RIDGE)
         self.testButton.grid(column = 0,row=0,padx=20,pady=20) #places the button on the app frame
@@ -30,7 +33,8 @@ class Application(tk.Frame):
         self.dbReadButton.grid(column = 2,row=0,padx=20,pady=20)
         self.dbAddPerson.grid(column = 3,row=0,padx=20,pady=20)
         self.quitButton.grid(column = 4,row=0,padx=20,pady=20)
-        self.nameTextBox.grid(column = 0, row = 1,padx=20,pady=20)
+        self.firstNameLabel.grid(column=0,row=1)
+        self.nameEntry.grid(column = 1, row = 1,padx=20,pady=20)
         self.canvas1.grid(row=2)
     
     def create_sqlite_database(self):
@@ -75,7 +79,7 @@ class Application(tk.Frame):
             print(sqlite3.sqlite_version)
             c = self.dbConn.cursor()
             
-            firstName = input("firstName : ")
+            firstName = self.nameEntry.get()
             surname = input("surname : ")
             userName = firstName[0]+surname
             formGroup = input("Form Group : ")
@@ -86,6 +90,7 @@ class Application(tk.Frame):
         except sqlite3.Error as e:
             print(e)
         finally:
+            self.nameEntry.delete(0, 'end')
             print("DB closed")
             if self.dbConn:
                 self.dbConn.close()
